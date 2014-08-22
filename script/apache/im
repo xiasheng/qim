@@ -1,0 +1,36 @@
+
+ServerName *:80
+
+<VirtualHost *:80>
+
+        DocumentRoot /var/www/im/im
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        WSGIScriptAlias / "/var/www/im/script/apache/django.wsgi"
+        <Directory />
+                Order deny,allow
+                Allow from all
+        </Directory>
+
+        Alias /res /var/www/im/static
+        <Directory "/var/www/im/static">
+               Options  FollowSymLinks
+               Order deny,allow
+               Allow from all
+        </Directory>
+
+        Alias /f /var/www/im/im/upload
+        <Directory "/var/www/im/im/upload">
+               Options  FollowSymLinks
+               Order deny,allow
+               Allow from all
+        </Directory>        
+
+</VirtualHost>
